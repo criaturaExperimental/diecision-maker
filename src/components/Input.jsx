@@ -6,9 +6,9 @@ export function InputBase(props) {
     <input
       className={props.className}
       placeholder={props.placeholder}
-      onKeyUp={props.keyHandler}
-      onChange={(event) => props.inputOnChange(event.target.value)}
       value={props.value}
+      onChange={(e) => props.onInputChange(e.target.value)}
+      onKeyUp={props.onEnterKey}
     ></input>
   );
 }

@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --mode production",
     "test": "jest",
-    "start": "webpack-dev-server --open --color --mode development"
+    "start": "webpack-dev-server --open --color --mode development --host 0.0.0.0"
   },
   "author": "Lucas deGomez",
   "license": "MPL-2.0",
