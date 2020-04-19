@@ -3,11 +3,7 @@ import styled from 'styled-components';
 
 export function Component(props) {
   return (
-    <li
-      className={props.className}
-      key={props.id}
-      onClick={() => props.removeItem(props.id)}
-    >
+    <li className={props.className} onClick={() => props.removeItem(props.id)}>
       {props.label}
     </li>
   );

@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { generateUID } from 'helpers/generateUID';
+import { getRandomItemFromArray } from 'helpers/getRandomItemFromArray';
 
 import { List } from 'components/List';
 import { Footer } from 'components/Footer';
@@ -21,6 +22,7 @@ const decisionList = [
 const initialState = {
   decisions: decisionList,
   candidate: '',
+  finalDecision: {},
 };
 
 function formatDecisionToItem(decision) {
@@ -46,6 +48,9 @@ let reducer = (state, action) => {
         ...state,
         decisions: arrayItemRemoved,
       };
+    case 'makeDecision':
+      const final = getRandomItemFromArray(state.decisions);
+      return { ...state, finalDecision: final };
     default:
       break;
   }
@@ -69,10 +74,14 @@ export function AppBase(props) {
   function removeDecision(decisionId) {
     dispatch({ type: 'removeItem', payload: decisionId });
   }
+  function makeDecision() {
+    dispatch({ type: 'makeDecision' });
+  }
 
   return (
     <main className={props.className}>
       <GlobalStyle />
+      <h1>{state.finalDecision.label}</h1>
       <List list={state.decisions} removeItem={removeDecision} />
       <Footer>
         <Input
@@ -82,7 +91,7 @@ export function AppBase(props) {
           onEnterKey={addDecisionWhenEnter}
         />
         <ButtonSimple
-          decisionButtonClickHandler={() => console.log('Button clicked')}
+          decisionButtonClickHandler={makeDecision}
           label='Make a decision'
         />
       </Footer>
