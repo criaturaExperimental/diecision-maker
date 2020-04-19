@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
+import { generateUID } from 'helpers/generateUID';
 
 import { List } from 'components/List';
 import { Footer } from 'components/Footer';
@@ -22,25 +23,29 @@ const initialState = {
   candidate: '',
 };
 
-function generateUID() {
-  let firstPart = (Math.random() * 46656) | 0;
-  let secondPart = (Math.random() * 46656) | 0;
-  firstPart = ('000' + firstPart.toString(36)).slice(-3);
-  secondPart = ('000' + secondPart.toString(36)).slice(-3);
-  return firstPart + secondPart;
-}
-
 function formatDecisionToItem(decision) {
   return { id: generateUID(), label: decision };
 }
 
 let reducer = (state, action) => {
   switch (action.type) {
+    case 'setCandidate':
+      return { ...state, candidate: action.payload };
     case 'addItem':
       const decisionItem = formatDecisionToItem(action.payload);
       return { ...state, decisions: [...state.decisions, decisionItem] };
-    case 'setCandidate':
-      return { ...state, candidate: action.payload };
+    case 'removeItem':
+      const indexItemToRemove = state.decisions.findIndex(
+        (item) => item.id === action.payload
+      );
+      const arrayItemRemoved = [
+        ...state.decisions.slice(0, indexItemToRemove),
+        ...state.decisions.slice(indexItemToRemove + 1),
+      ];
+      return {
+        ...state,
+        decisions: arrayItemRemoved,
+      };
     default:
       break;
   }
@@ -49,11 +54,11 @@ let reducer = (state, action) => {
 export function AppBase(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  function addDecision(decision) {
-    dispatch({ type: 'addItem', payload: decision });
+  function addDecision(decisionLabel) {
+    dispatch({ type: 'addItem', payload: decisionLabel });
   }
-  function setCandidate(decision) {
-    dispatch({ type: 'setCandidate', payload: decision });
+  function setCandidate(decisionLabel) {
+    dispatch({ type: 'setCandidate', payload: decisionLabel });
   }
   function addDecisionWhenEnter(event) {
     if (event.key === 'Enter') {
@@ -61,11 +66,14 @@ export function AppBase(props) {
       setCandidate('');
     }
   }
+  function removeDecision(decisionId) {
+    dispatch({ type: 'removeItem', payload: decisionId });
+  }
 
   return (
     <main className={props.className}>
       <GlobalStyle />
-      <List list={state.decisions} />
+      <List list={state.decisions} removeItem={removeDecision} />
       <Footer>
         <Input
           placeholder='add something'

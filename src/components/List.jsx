@@ -7,7 +7,11 @@ export function ListBase(props) {
   return (
     <ul className={props.className}>
       {props.list.map((item) => (
-        <ItemList key={item.id} label={item.label} />
+        <ItemList
+          id={item.id}
+          label={item.label}
+          removeItem={props.removeItem}
+        />
       ))}
     </ul>
   );
