@@ -27,7 +27,7 @@ const decisionList = [
 const initialState = {
   decisions: decisionList,
   candidate: '',
-  finalDecision: {},
+  finalDecision: { id: '', label: '' },
   menuOpen: false,
 };
 
