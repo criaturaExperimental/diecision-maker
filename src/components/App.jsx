@@ -35,9 +35,9 @@ function formatDecisionToItem(decision) {
 let reducer = (state, action) => {
   switch (action.type) {
     case 'setCandidate':
-      return { ...state, candidate: action.payload };
+      return { ...state, candidate: action.decisionLabel };
     case 'addItem':
-      const decisionItem = formatDecisionToItem(action.payload);
+      const decisionItem = formatDecisionToItem(action.decisionLabel);
       return { ...state, decisions: [...state.decisions, decisionItem] };
     case 'removeItem':
       return {
@@ -58,10 +58,10 @@ export function AppBase(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   function addDecision(decisionLabel) {
-    dispatch({ type: 'addItem', payload: decisionLabel });
+    dispatch({ type: 'addItem', decisionLabel });
   }
   function setCandidate(decisionLabel) {
-    dispatch({ type: 'setCandidate', payload: decisionLabel });
+    dispatch({ type: 'setCandidate', decisionLabel });
   }
   function addDecisionWhenEnter(event) {
     if (event.key === 'Enter') {
