@@ -40,19 +40,6 @@ beforeAll(() => {
   ];
 });
 
-describe('Get a Random Item from an array ::getRandomItemFromArray::', () => {
-  it('should return that item when single item', () => {
-    expect(getRandomItemFromArray(singleItemArray)).toBe(singleItemArray[0]);
-  });
-
-  it('should return one random item with proper fields from array', () => {
-    const selectedItem = getRandomItemFromArray(items);
-
-    expect(selectedItem.id).toBeTruthy();
-    expect(selectedItem.label).toBeTruthy();
-  });
-});
-
 describe('Return an array without the item which id is provided ::removeItemFromArray::', () => {
   it('should return an empty array when array has a single item', () => {
     const finalArray = removeItemFromArray(
@@ -73,11 +60,11 @@ describe('Return an array without the item which id is provided ::removeItemFrom
 
 describe('Return an item different of the item provided ::getAnotherRandomItemFromArray::', () => {
   it('should return the other item when the array has two items', () => {
-    const itemProvided = doubleItemArray[1];
-    const itemLeftToReturn = doubleItemArray[0];
+    const itemIdProvided = doubleItemArray[0].id;
+    const itemLeftToReturn = doubleItemArray[1];
     const itemRetrieved = getAnotherRandomItemFromArray(
       doubleItemArray,
-      itemProvided
+      itemIdProvided
     );
 
     expect(itemRetrieved).toBe(itemLeftToReturn);
@@ -85,7 +72,7 @@ describe('Return an item different of the item provided ::getAnotherRandomItemFr
 
   it('should return any other item but the provided item', () => {
     const itemProvided = items[1];
-    const itemRetrieved = getAnotherRandomItemFromArray(items, itemProvided);
+    const itemRetrieved = getAnotherRandomItemFromArray(items, itemProvided.id);
 
     expect(itemRetrieved).not.toBe(itemProvided);
   });

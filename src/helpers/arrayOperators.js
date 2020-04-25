@@ -1,4 +1,4 @@
-export function getRandomItemFromArray(array) {
+function getRandomItemFromArray(array) {
   const index = getRandomInt(array.length);
   return array[index];
 }
