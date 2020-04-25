@@ -7,7 +7,7 @@ export function Component(props) {
   const isFinalDecision = props.id === finalDecision.id;
   const classes = `${props.className} ${isFinalDecision ? 'active' : ''}`;
   return (
-    <li className={classes} onClick={() => props.removeItem(props.id)}>
+    <li className={classes} onClick={() => props.clickItem(props.id)}>
       {props.label}
     </li>
   );

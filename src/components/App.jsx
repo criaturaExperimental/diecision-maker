@@ -96,7 +96,7 @@ export function AppBase(props) {
       </MenuView>
       <main>
         <DecisionContext.Provider value={state.finalDecision}>
-          <List list={state.decisions} removeItem={removeDecision} />
+          <List list={state.decisions} clickItem={removeDecision} />
         </DecisionContext.Provider>
         <Footer>
           <Input

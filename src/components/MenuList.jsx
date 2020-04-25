@@ -3,12 +3,12 @@ import styled from 'styled-components';
 
 import { ItemList } from 'components/ItemList';
 
-export function ListBase(props) {
+export function Component(props) {
   return (
     <ul className={props.className}>
-      {props.list.map((item) => (
+      {props.list.map((item, index) => (
         <ItemList
-          key={item.id}
+          key={index}
           id={item.id}
           label={item.label}
           clickItem={props.clickItem}
@@ -18,12 +18,4 @@ export function ListBase(props) {
   );
 }
 
-export const List = styled(ListBase)`
-  list-style: none;
-  padding-inline-start: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 65vh;
-  overflow: scroll;
-`;
+export const MenuList = styled(Component)``;
