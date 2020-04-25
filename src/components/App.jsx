@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { generateUID } from 'helpers/generateUID';
 import {
   removeItemFromArray,
@@ -7,6 +7,7 @@ import {
 } from 'helpers/arrayOperators';
 
 import { Menu } from 'components/Menu';
+import { Header } from 'components/Header';
 import { List } from 'components/List';
 import { Footer } from 'components/Footer';
 import { Input } from 'components/Input';
@@ -61,7 +62,7 @@ let reducer = (state, action) => {
 
 export const DecisionContext = React.createContext();
 
-export function App(props) {
+export function AppBase(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   function addDecision(decisionLabel) {
@@ -88,9 +89,11 @@ export function App(props) {
   }
 
   return (
-    <React.Fragment>
+    <div className={props.className}>
       <GlobalStyle />
-      <Menu menuOpen={state.menuOpen} onMenuClick={onMenuClick} />
+      <Menu menuOpen={state.menuOpen} onMenuClick={onMenuClick}>
+        <Header appTitle='Diecision Maker' />
+      </Menu>
       <main>
         <DecisionContext.Provider value={state.finalDecision}>
           <List list={state.decisions} removeItem={removeDecision} />
@@ -108,17 +111,20 @@ export function App(props) {
           />
         </Footer>
       </main>
-    </React.Fragment>
+    </div>
   );
 }
+
+export const App = styled(AppBase)`
+  text-align: center;
+  main {
+    position: relative;
+    top: 50px;
+  }
+`;
 
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
-    text-align: center;
-  }
-  main {
-    position: relative;
-    top: 50px;
   }
 `;
