@@ -9,7 +9,7 @@ export function Component(props) {
   );
 }
 
-export const Menu = styled(Component)`
+export const MenuView = styled(Component)`
   top: 50px;
   cursor: pointer;
   background: black;

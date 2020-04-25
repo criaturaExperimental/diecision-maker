@@ -6,7 +6,7 @@ import {
   getAnotherRandomItemFromArray,
 } from 'helpers/arrayOperators';
 
-import { Menu } from 'components/Menu';
+import { MenuView } from 'components/MenuView';
 import { Header } from 'components/Header';
 import { List } from 'components/List';
 import { Footer } from 'components/Footer';
@@ -91,9 +91,9 @@ export function AppBase(props) {
   return (
     <div className={props.className}>
       <GlobalStyle />
-      <Menu menuOpen={state.menuOpen} onMenuClick={onMenuClick}>
+      <MenuView menuOpen={state.menuOpen} onMenuClick={onMenuClick}>
         <Header appTitle='Diecision Maker' />
-      </Menu>
+      </MenuView>
       <main>
         <DecisionContext.Provider value={state.finalDecision}>
           <List list={state.decisions} removeItem={removeDecision} />
