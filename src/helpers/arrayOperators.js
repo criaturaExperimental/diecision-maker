@@ -7,8 +7,10 @@ export function getAnotherRandomItemFromArray(array, previousItem) {
   return getRandomItemFromArray(removeItemFromArray(array, previousItem));
 }
 
-export function removeItemFromArray(array, itemToRemove) {
-  const indexItemToRemove = array.findIndex((item) => item === itemToRemove);
+export function removeItemFromArray(array, itemIdToRemove) {
+  const indexItemToRemove = array.findIndex(
+    (item) => item.id === itemIdToRemove
+  );
   return [
     ...array.slice(0, indexItemToRemove),
     ...array.slice(indexItemToRemove + 1),

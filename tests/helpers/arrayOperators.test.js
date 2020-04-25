@@ -53,17 +53,20 @@ describe('Get a Random Item from an array ::getRandomItemFromArray::', () => {
   });
 });
 
-describe('Return an array without the item provided ::removeItemFromArray::', () => {
+describe('Return an array without the item which id is provided ::removeItemFromArray::', () => {
   it('should return an empty array when array has a single item', () => {
-    const finalArray = removeItemFromArray(singleItemArray, singleItemArray[0]);
+    const finalArray = removeItemFromArray(
+      singleItemArray,
+      singleItemArray[0].id
+    );
 
     expect(finalArray.length).toBe(0);
   });
 
   it('should return an array without the element to be removed', () => {
-    const itemToBeExtracted = items[items.length - 1];
-    const finalArray = removeItemFromArray(items, itemToBeExtracted);
-    expect(finalArray[finalArray.length - 1]).not.toBe(itemToBeExtracted);
+    const itemToIdBeExtracted = items[items.length - 1].id;
+    const finalArray = removeItemFromArray(items, itemToIdBeExtracted);
+    expect(finalArray[finalArray.length - 1]).not.toBe(itemToIdBeExtracted);
     expect(finalArray).toStrictEqual(items.slice(0, items.length - 1));
   });
 });

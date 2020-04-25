@@ -1,7 +1,10 @@
 import React, { useReducer } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { generateUID } from 'helpers/generateUID';
-import { getRandomItemFromArray } from 'helpers/arrayOperators';
+import {
+  getRandomItemFromArray,
+  removeItemFromArray,
+} from 'helpers/arrayOperators';
 
 import { List } from 'components/List';
 import { Footer } from 'components/Footer';
@@ -37,16 +40,9 @@ let reducer = (state, action) => {
       const decisionItem = formatDecisionToItem(action.payload);
       return { ...state, decisions: [...state.decisions, decisionItem] };
     case 'removeItem':
-      const indexItemToRemove = state.decisions.findIndex(
-        (item) => item.id === action.payload
-      );
-      const arrayItemRemoved = [
-        ...state.decisions.slice(0, indexItemToRemove),
-        ...state.decisions.slice(indexItemToRemove + 1),
-      ];
       return {
         ...state,
-        decisions: arrayItemRemoved,
+        decisions: removeItemFromArray(state.decisions, action.decisionId),
       };
     case 'makeDecision':
       const final = getRandomItemFromArray(state.decisions);
@@ -74,7 +70,7 @@ export function AppBase(props) {
     }
   }
   function removeDecision(decisionId) {
-    dispatch({ type: 'removeItem', payload: decisionId });
+    dispatch({ type: 'removeItem', decisionId });
   }
   function makeDecision() {
     dispatch({ type: 'makeDecision' });
