@@ -2,8 +2,8 @@ import React, { useReducer } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { generateUID } from 'helpers/generateUID';
 import {
-  getRandomItemFromArray,
   removeItemFromArray,
+  getAnotherRandomItemFromArray,
 } from 'helpers/arrayOperators';
 
 import { List } from 'components/List';
@@ -45,8 +45,11 @@ let reducer = (state, action) => {
         decisions: removeItemFromArray(state.decisions, action.decisionId),
       };
     case 'makeDecision':
-      const final = getRandomItemFromArray(state.decisions);
-      return { ...state, finalDecision: final };
+      const finalDecision = getAnotherRandomItemFromArray(
+        state.decisions,
+        state.finalDecision.id
+      );
+      return { ...state, finalDecision };
     default:
       break;
   }
