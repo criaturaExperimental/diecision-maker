@@ -1,11 +1,12 @@
 import React, { useReducer } from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import { generateUID } from 'helpers/generateUID';
 import {
   removeItemFromArray,
   getAnotherRandomItemFromArray,
 } from 'helpers/arrayOperators';
 
+import { Menu } from 'components/Menu';
 import { List } from 'components/List';
 import { Footer } from 'components/Footer';
 import { Input } from 'components/Input';
@@ -26,6 +27,7 @@ const initialState = {
   decisions: decisionList,
   candidate: '',
   finalDecision: {},
+  menuOpen: false,
 };
 
 function formatDecisionToItem(decision) {
@@ -50,6 +52,8 @@ let reducer = (state, action) => {
         state.finalDecision.id
       );
       return { ...state, finalDecision };
+    case 'toggleMenu':
+      return { ...state, menuOpen: !state.menuOpen };
     default:
       break;
   }
@@ -57,7 +61,7 @@ let reducer = (state, action) => {
 
 export const DecisionContext = React.createContext();
 
-export function AppBase(props) {
+export function App(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   function addDecision(decisionLabel) {
@@ -79,33 +83,42 @@ export function AppBase(props) {
     dispatch({ type: 'makeDecision' });
   }
 
+  function onMenuClick() {
+    dispatch({ type: 'toggleMenu' });
+  }
+
   return (
-    <main className={props.className}>
+    <React.Fragment>
       <GlobalStyle />
-      <DecisionContext.Provider value={state.finalDecision}>
-        <List list={state.decisions} removeItem={removeDecision} />
-      </DecisionContext.Provider>
-      <Footer>
-        <Input
-          placeholder='add something'
-          value={state.candidate}
-          onInputChange={setCandidate}
-          onEnterKey={addDecisionWhenEnter}
-        />
-        <ButtonSimple
-          decisionButtonClickHandler={makeDecision}
-          label='Make a decision'
-        />
-      </Footer>
-    </main>
+      <Menu menuOpen={state.menuOpen} onMenuClick={onMenuClick} />
+      <main>
+        <DecisionContext.Provider value={state.finalDecision}>
+          <List list={state.decisions} removeItem={removeDecision} />
+        </DecisionContext.Provider>
+        <Footer>
+          <Input
+            placeholder='add something'
+            value={state.candidate}
+            onInputChange={setCandidate}
+            onEnterKey={addDecisionWhenEnter}
+          />
+          <ButtonSimple
+            decisionButtonClickHandler={makeDecision}
+            label='Make a decision'
+          />
+        </Footer>
+      </main>
+    </React.Fragment>
   );
 }
-
-export const App = styled(AppBase)`
-  text-align: center;
-`;
 
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
-  }`;
+    text-align: center;
+  }
+  main {
+    position: relative;
+    top: 50px;
+  }
+`;
