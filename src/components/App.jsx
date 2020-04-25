@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { generateUID } from 'helpers/generateUID';
-import { getRandomItemFromArray } from 'helpers/getRandomItemFromArray';
+import { getRandomItemFromArray } from 'helpers/arrayOperators';
 
 import { List } from 'components/List';
 import { Footer } from 'components/Footer';

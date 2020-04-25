@@ -5,7 +5,7 @@
   "main": "./src/index.js",
   "scripts": {
     "build": "webpack --mode production",
-    "test": "jest",
+    "test": "jest --watchAll",
     "start": "webpack-dev-server --open --color --mode development --host 0.0.0.0"
   },
   "author": "Lucas deGomez",
@@ -14,6 +14,7 @@
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-react": "^7.9.4",
+    "@types/jest": "^25.2.1",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "html-loader": "^1.0.0",
