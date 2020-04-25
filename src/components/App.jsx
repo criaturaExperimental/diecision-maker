@@ -56,6 +56,8 @@ let reducer = (state, action) => {
   }
 };
 
+export const DecisionContext = React.createContext();
+
 export function AppBase(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -81,8 +83,9 @@ export function AppBase(props) {
   return (
     <main className={props.className}>
       <GlobalStyle />
-      <h1>{state.finalDecision.label}</h1>
-      <List list={state.decisions} removeItem={removeDecision} />
+      <DecisionContext.Provider value={state.finalDecision}>
+        <List list={state.decisions} removeItem={removeDecision} />
+      </DecisionContext.Provider>
       <Footer>
         <Input
           placeholder='add something'
