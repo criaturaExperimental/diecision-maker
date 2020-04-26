@@ -7,6 +7,7 @@ import {
 } from 'helpers/arrayOperators';
 
 import { MenuView } from 'components/MenuView';
+import { MenuList } from 'components/MenuList';
 import { Header } from 'components/Header';
 import { List } from 'components/List';
 import { Footer } from 'components/Footer';
@@ -24,11 +25,20 @@ const decisionList = [
   },
 ];
 
+const menuList = [
+  {
+    label: 'Dice',
+  },
+  {
+    label: 'Directions',
+  },
+];
+
 const initialState = {
   decisions: decisionList,
   candidate: '',
   finalDecision: { id: '', label: '' },
-  menuOpen: false,
+  menuOpen: true,
 };
 
 function formatDecisionToItem(decision) {
@@ -92,7 +102,8 @@ export function AppBase(props) {
     <div className={props.className}>
       <GlobalStyle />
       <MenuView menuOpen={state.menuOpen} onMenuClick={onMenuClick}>
-        <Header appTitle='Diecision Maker' />
+        <MenuList list={menuList} clickItem={() => console.log('click')} />
+        <Header appTitle='diecision maker' />
       </MenuView>
       <main>
         <DecisionContext.Provider value={state.finalDecision}>
@@ -117,6 +128,7 @@ export function AppBase(props) {
 
 export const App = styled(AppBase)`
   text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
   main {
     position: relative;
     top: 50px;
