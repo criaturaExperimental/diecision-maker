@@ -1,4 +1,4 @@
-const binaryList = [
+const binary = [
   {
     id: '1',
     label: 'yes',
@@ -9,7 +9,7 @@ const binaryList = [
   },
 ];
 
-const diceList = [
+const die = [
   {
     id: '1',
     label: '1',
@@ -36,13 +36,36 @@ const diceList = [
   },
 ];
 
+const directions = [
+  {
+    id: '1',
+    label: 'South',
+  },
+  {
+    id: '2',
+    label: 'West',
+  },
+  {
+    id: '3',
+    label: 'North',
+  },
+  {
+    id: '4',
+    label: 'East',
+  },
+];
+
 export const menuPresets = [
   {
     label: 'Die',
-    presetList: diceList,
+    presetList: die,
   },
   {
     label: 'Yes or No',
-    presetList: binaryList,
+    presetList: binary,
+  },
+  {
+    label: 'Directions',
+    presetList: directions,
   },
 ];
