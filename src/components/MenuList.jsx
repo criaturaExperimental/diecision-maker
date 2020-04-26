@@ -7,7 +7,12 @@ export function Component(props) {
   return (
     <ul className={props.className}>
       {props.list.map((item, index) => (
-        <MenuItem key={index} label={item.label} clickItem={props.clickItem} />
+        <MenuItem
+          key={index}
+          label={item.label}
+          clickItem={props.clickItem}
+          presetList={item.presetList}
+        />
       ))}
     </ul>
   );

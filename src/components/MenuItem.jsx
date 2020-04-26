@@ -3,7 +3,10 @@ import styled from 'styled-components';
 
 export function Component(props) {
   return (
-    <li className={props.className} onClick={() => props.clickItem()}>
+    <li
+      className={props.className}
+      onClick={() => props.clickItem(props.presetList)}
+    >
       {props.label}
     </li>
   );

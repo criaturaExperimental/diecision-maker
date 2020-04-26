@@ -25,12 +25,52 @@ const decisionList = [
   },
 ];
 
-const menuList = [
+const binaryList = [
   {
-    label: 'Dice',
+    id: '0',
+    label: 'no',
   },
   {
-    label: 'Directions',
+    id: '1',
+    label: 'yes',
+  },
+];
+
+const diceList = [
+  {
+    id: '1',
+    label: '1',
+  },
+  {
+    id: '2',
+    label: '2',
+  },
+  {
+    id: '3',
+    label: '3',
+  },
+  {
+    id: '4',
+    label: '4',
+  },
+  {
+    id: '5',
+    label: '5',
+  },
+  {
+    id: '6',
+    label: '6',
+  },
+];
+
+const menuList = [
+  {
+    label: 'Die',
+    presetList: diceList,
+  },
+  {
+    label: 'Yes or No',
+    presetList: binaryList,
   },
 ];
 
@@ -65,6 +105,8 @@ let reducer = (state, action) => {
       return { ...state, finalDecision };
     case 'toggleMenu':
       return { ...state, menuOpen: !state.menuOpen };
+    case 'setPreset':
+      return { ...state, decisions: action.presetList };
     default:
       break;
   }
@@ -97,12 +139,15 @@ export function AppBase(props) {
   function onMenuClick() {
     dispatch({ type: 'toggleMenu' });
   }
+  function setPreset(presetList) {
+    dispatch({ type: 'setPreset', presetList });
+  }
 
   return (
     <div className={props.className}>
       <GlobalStyle />
       <MenuView menuOpen={state.menuOpen} onMenuClick={onMenuClick}>
-        <MenuList list={menuList} clickItem={() => console.log('click')} />
+        <MenuList list={menuList} clickItem={setPreset} />
         <Header appTitle='diecision maker' />
       </MenuView>
       <main>
