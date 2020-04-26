@@ -103,6 +103,8 @@ let reducer = (state, action) => {
         state.finalDecision.id
       );
       return { ...state, finalDecision };
+    case 'clearDecision':
+      return { ...state, finalDecision: { id: '', label: '' } };
     case 'toggleMenu':
       return { ...state, menuOpen: !state.menuOpen };
     case 'setPreset':
@@ -141,6 +143,7 @@ export function AppBase(props) {
   }
   function setPreset(presetList) {
     dispatch({ type: 'setPreset', presetList });
+    dispatch({ type: 'clearDecision' });
   }
 
   return (
