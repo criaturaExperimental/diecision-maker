@@ -5,6 +5,7 @@ import {
   removeItemFromArray,
   getAnotherRandomItemFromArray,
 } from 'helpers/arrayOperators';
+import { menuPresets } from 'repositories/presets';
 
 import { MenuView } from 'components/MenuView';
 import { MenuList } from 'components/MenuList';
@@ -14,68 +15,10 @@ import { Footer } from 'components/Footer';
 import { Input } from 'components/Input';
 import { ButtonSimple } from 'components/ButtonSimple';
 
-const decisionList = [
-  {
-    id: '01',
-    label: 'uno',
-  },
-  {
-    id: '02',
-    label: 'dos',
-  },
-];
-
-const binaryList = [
-  {
-    id: '0',
-    label: 'no',
-  },
-  {
-    id: '1',
-    label: 'yes',
-  },
-];
-
-const diceList = [
-  {
-    id: '1',
-    label: '1',
-  },
-  {
-    id: '2',
-    label: '2',
-  },
-  {
-    id: '3',
-    label: '3',
-  },
-  {
-    id: '4',
-    label: '4',
-  },
-  {
-    id: '5',
-    label: '5',
-  },
-  {
-    id: '6',
-    label: '6',
-  },
-];
-
-const menuList = [
-  {
-    label: 'Die',
-    presetList: diceList,
-  },
-  {
-    label: 'Yes or No',
-    presetList: binaryList,
-  },
-];
+const firstPresetList = menuPresets[0].presetList;
 
 const initialState = {
-  decisions: decisionList,
+  decisions: firstPresetList,
   candidate: '',
   finalDecision: { id: '', label: '' },
   menuOpen: true,
@@ -150,7 +93,7 @@ export function AppBase(props) {
     <div className={props.className}>
       <GlobalStyle />
       <MenuView menuOpen={state.menuOpen} onMenuClick={onMenuClick}>
-        <MenuList list={menuList} clickItem={setPreset} />
+        <MenuList list={menuPresets} clickItem={setPreset} />
         <Header appTitle='diecision maker' />
       </MenuView>
       <main>
