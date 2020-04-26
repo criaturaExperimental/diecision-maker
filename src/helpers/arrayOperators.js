@@ -3,8 +3,17 @@ function getRandomItemFromArray(array) {
   return array[index];
 }
 
-export function getAnotherRandomItemFromArray(array, previousItem) {
-  return getRandomItemFromArray(removeItemFromArray(array, previousItem));
+export function getAnotherRandomItemFromArray(array, previousItemId) {
+  const isOneItemArray = array.length === 1;
+  const isEmptyArray = array.length === 0;
+  if (isEmptyArray) {
+    return { id: '', label: '' };
+  }
+  if (isOneItemArray) {
+    return array[0];
+  } else {
+    return getRandomItemFromArray(removeItemFromArray(array, previousItemId));
+  }
 }
 
 export function removeItemFromArray(array, itemIdToRemove) {

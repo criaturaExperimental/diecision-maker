@@ -59,6 +59,23 @@ describe('Return an array without the item which id is provided ::removeItemFrom
 });
 
 describe('Return an item different of the item provided ::getAnotherRandomItemFromArray::', () => {
+  it('should return the same item when the array is empty', () => {
+    const itemRetrieved = getAnotherRandomItemFromArray([], '');
+
+    expect(itemRetrieved).toStrictEqual({ id: '', label: '' });
+  });
+
+  it('should return the same item when the array has one item', () => {
+    const itemIdProvided = singleItemArray[0].id;
+    const itemLeftToReturn = singleItemArray[0];
+    const itemRetrieved = getAnotherRandomItemFromArray(
+      singleItemArray,
+      itemIdProvided
+    );
+
+    expect(itemRetrieved).toBe(itemLeftToReturn);
+  });
+
   it('should return the other item when the array has two items', () => {
     const itemIdProvided = doubleItemArray[0].id;
     const itemLeftToReturn = doubleItemArray[1];
