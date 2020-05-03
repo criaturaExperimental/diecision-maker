@@ -59,9 +59,15 @@ let reducer = (state, action) => {
 
 export const DecisionContext = React.createContext();
 
+const Main = styled.main`
+  position: relative;
+  top: 50px;
+`;
+
 export function AppBase(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  //#region Functions
   function addDecision(decisionLabel) {
     dispatch({ type: 'addItem', decisionLabel });
   }
@@ -88,6 +94,7 @@ export function AppBase(props) {
     dispatch({ type: 'setPreset', presetList });
     dispatch({ type: 'clearDecision' });
   }
+  //#endregion Functions
 
   return (
     <div className={props.className}>
@@ -96,7 +103,7 @@ export function AppBase(props) {
         <MenuList list={menuPresets} clickItem={setPreset} />
         <Header appTitle='diecision maker' />
       </MenuView>
-      <main>
+      <Main>
         <DecisionContext.Provider value={state.finalDecision}>
           <List list={state.decisions} clickItem={removeDecision} />
         </DecisionContext.Provider>
@@ -112,7 +119,7 @@ export function AppBase(props) {
             label='Make a decision'
           />
         </Footer>
-      </main>
+      </Main>
     </div>
   );
 }
@@ -120,10 +127,6 @@ export function AppBase(props) {
 export const App = styled(AppBase)`
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
-  main {
-    position: relative;
-    top: 50px;
-  }
 `;
 
 const GlobalStyle = createGlobalStyle`
