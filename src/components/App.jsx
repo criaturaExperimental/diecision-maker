@@ -94,7 +94,23 @@ export function AppBase(props) {
     dispatch({ type: 'setPreset', presetList });
     dispatch({ type: 'clearDecision' });
   }
+  function scrollToActive() {
+    setTimeout(() => {
+      document.querySelector('.active').scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'nearest',
+      });
+    }, 100);
+  }
   //#endregion Functions
+
+  const useCases = {
+    makeDecisionUseCase: () => {
+      makeDecision();
+      scrollToActive();
+    },
+  };
 
   return (
     <div className={props.className}>
@@ -115,7 +131,7 @@ export function AppBase(props) {
             onEnterKey={addDecisionWhenEnter}
           />
           <ButtonSimple
-            decisionButtonClickHandler={makeDecision}
+            decisionButtonClickHandler={useCases.makeDecisionUseCase}
             label='Make a decision'
           />
         </Footer>
