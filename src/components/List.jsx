@@ -26,4 +26,8 @@ export const List = styled(ListBase)`
   align-items: center;
   height: 65vh;
   overflow: scroll;
+  scrollbar-width: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
