@@ -10,7 +10,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm build && git add ./dist/* && git commit -m 'building page'"
+      "pre-push": "npm run build && git add ./dist/* && git commit -m 'building page'"
     }
   },
   "author": "Lucas deGomez",
