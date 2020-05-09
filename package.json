@@ -8,6 +8,11 @@
     "test": "jest --watchAll",
     "start": "webpack-dev-server --open --color --config ./webpack.config.dev.js --host 0.0.0.0"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm build"
+    }
+  },
   "author": "Lucas deGomez",
   "license": "MPL-2.0",
   "devDependencies": {
@@ -19,6 +24,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "html-loader": "^1.0.0",
     "html-webpack-plugin": "^4.0.3",
+    "husky": "^4.2.5",
     "jest": "^25.2.4",
     "styled-components": "^5.0.1",
     "webpack": "^4.42.1",
