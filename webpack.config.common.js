@@ -7,6 +7,7 @@ module.exports = {
   },
   resolve: {
     alias: {
+      adapters: path.resolve(__dirname, './src/adapters/'),
       components: path.resolve(__dirname, './src/components/'),
       helpers: path.resolve(__dirname, './src/helpers/'),
       repositories: path.resolve(__dirname, './src/repositories/'),

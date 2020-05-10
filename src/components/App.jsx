@@ -1,6 +1,5 @@
 import React, { useReducer } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
-import { generateUID } from 'helpers/generateUID';
 import {
   removeItemFromArray,
   getAnotherRandomItemFromArray,
@@ -14,6 +13,7 @@ import { List } from 'components/List';
 import { Footer } from 'components/Footer';
 import { Input } from 'components/Input';
 import { ButtonSimple } from 'components/ButtonSimple';
+import { formatDecisionToItem } from 'adapters/adaptDecisionToItem';
 
 const firstPresetList = menuPresets[0].presetList;
 
@@ -23,10 +23,6 @@ const initialState = {
   finalDecision: { id: '', label: '' },
   menuOpen: true,
 };
-
-function formatDecisionToItem(decision) {
-  return { id: generateUID(), label: decision };
-}
 
 let reducer = (state, action) => {
   switch (action.type) {
