@@ -4,6 +4,7 @@ import {
   removeItemFromArray,
   getAnotherRandomItemFromArray,
 } from 'helpers/arrayOperators';
+import { formatDecisionToItem } from 'adapters/adaptDecisionToItem';
 import { menuPresets } from 'repositories/presets';
 
 import { MenuView } from 'components/MenuView';
@@ -13,7 +14,7 @@ import { List } from 'components/List';
 import { Footer } from 'components/Footer';
 import { Input } from 'components/Input';
 import { ButtonSimple } from 'components/ButtonSimple';
-import { formatDecisionToItem } from 'adapters/adaptDecisionToItem';
+import { Credits } from 'components/Credits';
 
 const firstPresetList = menuPresets[0].presetList;
 
@@ -132,6 +133,7 @@ export function AppBase(props) {
           />
         </Footer>
       </Main>
+      <Credits />
     </div>
   );
 }
