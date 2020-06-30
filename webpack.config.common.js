@@ -13,12 +13,12 @@ module.exports = {
       repositories: path.resolve(__dirname, './src/repositories/'),
       styles: path.resolve(__dirname, './src/styles/'),
     },
-    extensions: ['.js', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|tsx|ts)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
